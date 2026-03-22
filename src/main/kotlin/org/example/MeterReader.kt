@@ -1,7 +1,7 @@
 package org.example
 
-import org.example.org.example.RecordConstants
-import org.example.org.example.RecordConstants.FIELD_INTERVAL_VALUE_START
+import org.example.RecordConstants.FIELD_INTERVAL_VALUE_START
+import org.example.org.example.SqlGenerator
 import java.io.File
 
 class MeterReader(val input: String, val sqlGenerator: SqlGenerator) {

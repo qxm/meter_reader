@@ -1,4 +1,4 @@
-package org.example.org.example
+package org.example
 
 object RecordConstants {
     val HEADER_TYPE = "100"
