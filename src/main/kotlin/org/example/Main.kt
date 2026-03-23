@@ -10,19 +10,20 @@ import kotlinx.coroutines.runBlocking
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 fun main() {
-    val channel = Channel<String>(capacity = Channel.UNLIMITED)
+    val channel = Channel<String>()//(capacity = Channel.UNLIMITED)
     val reader = MeterReader("example.txt", channel)
 
     runBlocking {
+        val writeJob = launch {
+            val sqlWriter = SqlWriter("sql.txt", channel)
+            sqlWriter.writeFile()
+        }
         val readJob = launch {
             reader.read()
         }
         readJob.join()
         channel.close()
-        val writeJob = launch {
-            val sqlWriter = SqlWriter("sql.txt", channel)
-            sqlWriter.writeFile()
-        }
+
         writeJob.join()
     }
 
